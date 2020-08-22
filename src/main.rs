@@ -4,6 +4,7 @@ mod mod_org;
 mod mod_example;  
 mod io;
 mod basic;
+mod own;
 
 use std::process;
 use mod_example::mod_test;
@@ -11,13 +12,33 @@ use mod_example::mod_test;
 fn main() {
     
     /* basic concepts */
-    basic::concept();
-    basic::shadow();
-    basic::data_types();
-    basic::tuple_example();
-    basic::array_example();
-    basic::ctrlflow_example();
-    basic::loop_example();
+    // basic::concept();
+    // basic::shadow();
+    // basic::data_types();
+    // basic::tuple_example();
+    // basic::array_example();
+    // basic::ctrlflow_example();
+    // basic::loop_example();
+
+    /* ownership */
+    // own::scope_example();
+    // own::move_example();
+    // own::move_example2();
+
+    // let x = own::create_series(10);
+    // println!("series: {:?}",x); 
+
+    // own::copy_trait_example();
+    // own::struct_copy_example();
+    // own::ref_example();
+    // own::mut_ref_example();
+    // own::mut_ref_restrict();
+    // own::mut_ref_restrict2();
+    // own::mut_ref_example2(); 
+    let alice = "Alice";
+    let bob = "Bob";
+    println!("{}", own::lifetime_example(alice, bob));
+
     process::exit(0x0100);
 
     /* mod example, organizing code */
