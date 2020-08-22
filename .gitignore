@@ -10,3 +10,4 @@ Cargo.lock
 **/*.rs.bk
 src/.DS_Store
 src/mod_example/.DS_Store
+.DS_Store
