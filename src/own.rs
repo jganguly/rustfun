@@ -1,4 +1,4 @@
-pub fn scope_example() {
+pub fn example1() {
     {
         let x = 1;
         println!("x: {}", x);
@@ -7,20 +7,18 @@ pub fn scope_example() {
     // println!("x: {}", x); // ERROR
 }
 
-pub fn move_example() {
+pub fn example2() {
 	let a = vec![1, 2, 3];  // a growable array literal
-	let b = a;              // a can no longer be used
+	let b = a;              // a can no longer be used beyond this line
 	println!("a: {:?}", b); 
 	// println!("a: {:?}", a); // ERROR
 }
 
-pub fn move_example2() {
+pub fn example3() {
     let v = vec![1,2,3];
     let s = sum(v);
 	// println!("sum of {:?}: {}", v, s); // ERROR
 }
-
-
 
 fn sum(vector: Vec<i32>) -> i32 {
 	let mut sum = 0;
@@ -32,11 +30,24 @@ fn sum(vector: Vec<i32>) -> i32 {
 	sum
 }
 
-pub fn create_series(x: i32) -> Vec<i32> {
-	let result = vec![x, x+1, x+2, x+3, x+4];
+pub fn example4(x: i32) -> Vec<i32> {
+	let result = vec![x, x+1, x+2, x+3, x+4]; // allocated on the heap
 	result
 }
 
+pub fn example5(x: &mut i32){
+    *x = *x + 1; // '*' is dereference operator to get value (as in C)
+}
+
+pub fn example6(x: &mut i32) -> i32 { 
+    println!("Inside function {}",x);
+    *x + 1 
+}
+
+pub fn example7(s: &str) -> &str{
+    println!("Inside function {}",s);
+    &s[1..3]
+}
 
 pub fn copy_trait_example() {
 	let a = 42;
@@ -102,7 +113,7 @@ pub fn mut_ref_restrict2() {
     
     println!("{}, {}", r1, r2);
 } 
-*/
+ */
 
 
 pub fn no_dang_ref_example() {
@@ -110,7 +121,7 @@ pub fn no_dang_ref_example() {
 }
 
 /* ERROR: 
-fn dangle() -> &String {    // This will not compile
+fn dangle() -> &String { // ERROR: will not compile
 	let s = String::from("hello");
 	&s
 }
@@ -138,4 +149,19 @@ pub fn lifetime_example<'a>(x: &'a str, y: &'a str) -> &'a str {
         y
     }
 }
+
+use std::fmt::Debug;
+fn print_it( input: impl Debug + 'static ) {
+    println!( "'static value passed in is: {:?}", input );
+}
+
+pub fn traitbound_example() {
+    // i is owned and contains no references, thus it's 'static:
+    let i = 5;
+    print_it(i);
+
+    // ERROR, &i only has the lifetime defined by the scope of traitbound_example(), not 'static:
+    // print_it(&i);
+}
+
 
