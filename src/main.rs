@@ -9,6 +9,7 @@ mod st;
 mod tra;
 mod enu;
 mod col;
+mod err;
 mod util;
 
 use mod_example::mod_test;
@@ -169,6 +170,10 @@ fn main() {
     col::vec_example();
     col::hm_example();
     col::hs_example();
+
+    /* err */
+    err::panic_example();
+    err::error_example();
 
     /* Util */
 
