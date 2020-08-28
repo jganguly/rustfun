@@ -150,18 +150,18 @@ pub fn lifetime_example<'a>(x: &'a str, y: &'a str) -> &'a str {
     }
 }
 
-use std::fmt::Debug;
-fn print_it( input: impl Debug + 'static ) {
-    println!( "'static value passed in is: {:?}", input );
-}
+// use std::fmt::Debug;
+// fn print_it( input: impl Debug + 'static ) {
+//     println!( "'static value passed in is: {:?}", input );
+// }
 
-pub fn traitbound_example() {
-    // i is owned and contains no references, thus it's 'static:
-    let i = 5;
-    print_it(i);
+// pub fn traitbound_example() {
+//     // i is owned and contains no references, thus it's 'static:
+//     let i = 5;
+//     print_it(i);
 
-    // ERROR, &i only has the lifetime defined by the scope of traitbound_example(), not 'static:
-    // print_it(&i);
-}
+//     // ERROR, &i only has the lifetime defined by the scope of traitbound_example(), not 'static:
+//     // print_it(&i);
+// }
 
 

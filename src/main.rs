@@ -6,10 +6,13 @@ mod io;
 mod basic;
 mod own;
 mod st;
+mod tra;
+mod enu;
 mod util;
 
 
 use mod_example::mod_test;
+
 
 fn main() {
     
@@ -45,17 +48,17 @@ fn main() {
     // own::example2();
     // own::example3();
 
-    let mut x: i32 = 42;
-    own::example5(&mut x);  // x is passed by reference
-    println!("{}\n",x);
+    // let mut x: i32 = 42;
+    // own::example5(&mut x);  // x is passed by reference
+    // println!("{}\n",x);
 
-    let mut x: i32 = 42;
-    let y = own::example6(&mut x);
-    println!("Returned value {:?}\n",y);
+    // let mut x: i32 = 42;
+    // let y = own::example6(&mut x);
+    // println!("Returned value {:?}\n",y);
 
-    let mut s = "Hello";
-    let s = own::example7(&mut s);
-    println!("Returned slice {:?}\n",s);
+    // let mut s = "Hello";
+    // let s = own::example7(&mut s);
+    // println!("Returned slice {:?}\n",s);
 
 
     // let x = own::create_series(10);
@@ -74,8 +77,13 @@ fn main() {
     // println!("{}", own::lifetime_example(alice, bob));
 
     /* st */
-    // let r = st::Rect {w:10, h:20};
-    // println!("{}",r.area());
+
+    // let f = st::Function{};
+    // f.say_hello();
+
+    // let r = st::Rect {id:"abc",width:10, length:20};
+    // println!("Area = {}",r.area());
+    // println!("Volume = {}",r.volume(10));
 
     // let mut person = 
     //     st::Person { 
@@ -91,9 +99,71 @@ fn main() {
     // f1(&x);
 
 
-    // let f = st::Function{};
-    // f.say_hello();
+    /* tra */
+    // use tra::Animal;
+    // let h = tra::Herbivore;
+    // h.eat();
 
+    // let c = tra::Carnivore;
+    // c.eat();
+
+    // use tra::Activity;
+    // let eagle = tra::Eagle;
+    // eagle.fly();
+    // tra::activity(eagle);
+
+    // let hen = tra::Hen;
+    // tra::activity(hen);      // Error
+
+    // let sound_book = tra::SoundBook {
+    //     sounds: vec! [
+    //         Box::new(tra::Horse{}),
+    //         Box::new(tra::Deer{}),
+    //         Box::new(tra::Tiger{}),
+    //         Box::new(tra::Duck{})
+    //     ]
+    // };
+
+    // sound_book.run();
+
+    /* enu */
+    use enu::Gender;
+    let male = enu::Gender::Male;
+    let female = enu::Gender::Female;
+    println!("{:?}",male);
+    println!("{:?}",female);
+    
+
+    let my_black = enu::MyBlack {
+        name: String::from("my black"), 
+        rgb: (10,10,10)
+    };
+    let black = enu::Color::Black(my_black);
+    let white = enu::Color::White(255,255,255);
+    println!("{:?}",black);
+    println!("{:?}",white);
+    white.printColor();
+
+    let s = Some(803);
+    assert_eq! (s.is_some(), true);
+    println!("{}",s.unwrap());
+
+    match black {
+        enu::Color::White(x,y,z) => println!("{} {} {}",x,y,z),
+        enu::Color::Black(x) => println!("{:?}",x.rgb),
+    }
+
+    let some_u8_value = 4u8;
+    match some_u8_value {
+        1 => println!("One"),
+        3 => println!("Three"),
+        5 => println!("Five"),
+        7 => println!("Seven"),
+        9 => println!("Nine"),
+        _ => (),
+    }
+    
+    enu::match_example(4);
 
     /* Util */
 
@@ -103,13 +173,31 @@ fn main() {
 
     // util::vec_example();
 
-
-
-
-
-
-
 }
+
+//  fn example1() {
+
+    
+//     pub trait Animal {
+//          fn eat(&self);
+//     }
+
+//     pub struct Herbivore;
+//     struct Carnivore;
+
+//     impl Animal for Herbivore {
+//          fn eat(&self) {
+//             println!("I eat plants");
+//         }
+//     }
+
+//     impl Animal for Carnivore {
+//         fn eat(&self) {
+//             println!("I eat meat");
+//         }
+//     }
+
+// }
 
 fn f1(id: &str) {
     let x = &id[1..3];

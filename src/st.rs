@@ -1,21 +1,28 @@
-pub struct Rect {
-    pub w: i32,
-    pub h: i32
-}
-
-impl Rect {
-    pub fn area(&self) -> i32 {
-        self.w * self.h
-    }
-}
-
-pub struct Function;
+pub struct Function;    // unit struct, has no data
 
 impl Function {
     pub fn say_hello(&self) {
         println!("{:?}", "Hello" );
     }
 }
+
+pub struct Rect<'a> {
+    pub id: &'a str,
+    pub width: i32,
+    pub length: i32
+}
+
+impl<'a> Rect<'a> {
+    pub fn area(&self) -> i32 {
+        self.width * self.length
+    }
+
+    pub fn volume(&self, height: i32) -> i32 {
+        self.area()*height
+    }
+}
+
+
 
 
 #[derive(Debug)]
