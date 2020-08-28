@@ -8,8 +8,8 @@ mod own;
 mod st;
 mod tra;
 mod enu;
+mod col;
 mod util;
-
 
 use mod_example::mod_test;
 
@@ -164,6 +164,11 @@ fn main() {
     }
     
     enu::match_example(4);
+
+    /* col */
+    col::vec_example();
+    col::hm_example();
+    col::hs_example();
 
     /* Util */
 
